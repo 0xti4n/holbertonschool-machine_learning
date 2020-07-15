@@ -10,10 +10,11 @@ def matrix_shape(matrix):
     """
     shape_matrix = []
 
-    shape_matrix.append(len(matrix))
-    shape_matrix.append(len(matrix[0]))
+    if matrix:
+        shape_matrix.append(len(matrix))
+        shape_matrix.append(len(matrix[0]))
 
-    if type(matrix[0][0]) != int:
-        shape_matrix.append(len(matrix[0][0]))
+        if type(matrix[0][0]) == list:
+            shape_matrix.append(len(matrix[0][0]))
 
     return shape_matrix
