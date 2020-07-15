@@ -9,14 +9,11 @@ def matrix_shape(matrix):
         the shape of a matrix
     """
     shape_matrix = []
-    len_matrix = len(matrix)
 
-    shape_matrix.append(len_matrix)
+    shape_matrix.append(len(matrix))
     shape_matrix.append(len(matrix[0]))
 
-    try:
+    if type(matrix[0][0]) != int:
         shape_matrix.append(len(matrix[0][0]))
-    except TypeError:
-        pass
 
     return shape_matrix
