@@ -29,7 +29,7 @@ student_grades = np.random.normal(68, 15, 50)
 # subplot
 fig = plt.figure()
 fig.suptitle('All in One')
-fig.subplots_adjust(hspace=0.7, wspace=0.4)
+fig.subplots_adjust(hspace=0.7, wspace=0.3)
 ax1 = plt.subplot2grid((3, 2), (0, 0))
 ax2 = plt.subplot2grid((3, 2), (0, 1))
 ax3 = plt.subplot2grid((3, 2), (1, 0))
@@ -65,8 +65,8 @@ ax4.plot(x3, y32, 'g-', label='Ra-226')
 ax4.legend(fontsize='x-small')
 
 # task 4
-x = np.arange(110, step=10)
-y = np.arange(30, step=5)
+x = np.arange(0, 110, step=10)
+y = np.arange(0, 30, step=5)
 
 ax5.set_xticks(x)
 ax5.set_ylim(0, 30)
