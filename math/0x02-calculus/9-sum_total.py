@@ -7,4 +7,7 @@ def summation_i_squared(n):
 
     if n == 0:
         return 0
-    return n ** 2 + summation_i_squared(n - 1)
+    res = n * n + summation_i_squared(n - 1)
+    if not res:
+        return None
+    return res
