@@ -5,9 +5,9 @@
 def summation_i_squared(n):
     """Calculates summation"""
 
-    if n == 0:
-        return 0
-    res = n * n + summation_i_squared(n - 1)
-    if not res:
+    if type(n) != int:
         return None
+
+    res = n * (n + 1) * (2 * n + 1) // 6
+
     return res
