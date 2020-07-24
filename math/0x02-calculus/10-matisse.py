@@ -6,12 +6,12 @@ def poly_derivative(poly):
     """calculates the derivative
     of a polynomial
     """
-    if len(poly) == 0:
+    if type(poly) != list or len(poly) == 0:
         return None
 
-    derivate = [poly[i] * i for i in range(1, len(poly))]
-
-    if len(derivate) == 0:
+    if len(poly) == 1:
         return [0]
+
+    derivate = [poly[i] * i for i in range(1, len(poly))]
 
     return derivate
