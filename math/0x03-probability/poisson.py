@@ -19,12 +19,11 @@ class Poisson():
             if self.lambtha < 0:
                 raise ValueError('lambtha must be a positive value')
         if data:
+            self.lambtha = sum(data) / len(data)
             if type(data) is not list:
                 raise TypeError('data must be a list')
             if len(data) < 2:
                 raise ValueError('data must contain multiple values')
-            else:
-                self.lambtha = sum(data) / len(data)
 
     def pmf(self, k):
         """Calculates the value of the
