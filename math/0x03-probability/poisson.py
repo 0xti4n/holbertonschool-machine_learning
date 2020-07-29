@@ -14,11 +14,10 @@ class Poisson():
     a poisson distribution
     """
     def __init__(self, data=None, lambtha=1.):
+        self.lambtha = float(lambtha)
         if data is None:
-            if lambtha < 0:
+            if self.lambtha < 0:
                 raise ValueError('lambtha must be a positive value')
-            else:
-                self.lambtha = float(lambtha)
         if data:
             if type(data) is not list:
                 raise TypeError('data must be a list')
