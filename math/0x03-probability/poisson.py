@@ -14,18 +14,18 @@ class Poisson():
     a poisson distribution
     """
     def __init__(self, data=None, lambtha=1.):
-        if data is None:
-            if self.lambtha <= 0:
-                raise ValueError('lambtha must be a positive value')
-            self.lambtha = float(lambtha)
-        if data:
+        """constructor"""
+        if data is not None:
             if type(data) is not list:
                 raise TypeError('data must be a list')
             if len(data) <= 2:
                 raise ValueError('data must contain multiple values')
-            else:
-                self.lambtha = float(sum(data) / len(data))
-
+            self.lambtha = float(sum(data) / len(data))
+        else:
+            if lambtha <= 0:
+                raise ValueError('lambtha must be a positive value')
+            self.lambtha = float(lambtha)
+      
     def pmf(self, k):
         """Calculates the value of the
         Probability Mass Function
