@@ -38,7 +38,7 @@ class Binomial():
             self.p = float(p)
 
     def pmf(self, k):
-        """function Calculates the value of
+        """function that Calculates the value of
         the Probability Mass Function for
         a given number of successes"""
         if type(k) is not int:
@@ -52,4 +52,18 @@ class Binomial():
             combinatorie = fact_n / result
             PMF = combinatorie * self.p ** k * (1 - self.p) ** (self.n - k)
             return PMF
+        return 0
+
+    def cdf(self, k):
+        """function that Calculates the value of
+        the Cumulative Distribution Function
+        for a given number of successes"""
+        if type(k) is not int:
+            k = int(k)
+
+        if k >= 0:
+            CDF = 0
+            for i in range(k + 1):
+                CDF += self.pmf(i)
+            return CDF
         return 0
