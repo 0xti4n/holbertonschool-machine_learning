@@ -25,7 +25,7 @@ class Poisson():
             if lambtha <= 0:
                 raise ValueError('lambtha must be a positive value')
             self.lambtha = float(lambtha)
-      
+
     def pmf(self, k):
         """Calculates the value of the
         Probability Mass Function
