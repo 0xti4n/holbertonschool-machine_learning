@@ -2,6 +2,13 @@
 """binomial distribution"""
 
 
+def fact(n):
+    """Factorial"""
+    if n <= 1:
+        return 1
+    return n * fact(n - 1)
+
+
 class Binomial():
     """class that represents a
     binomial distribution"""
@@ -29,3 +36,20 @@ class Binomial():
                 raise ValueError('p must be greater than 0 and less than 1')
             self.n = int(n)
             self.p = float(p)
+
+    def pmf(self, k):
+        """function Calculates the value of
+        the Probability Mass Function for
+        a given number of successes"""
+        if type(k) is not int:
+            k = int(k)
+
+        if k >= 0:
+            fact_n = fact(self.n)
+            fact_k = fact(k)
+            fact_n_k = fact(self.n - k)
+            result = fact_k * fact_n_k
+            combinatorie = fact_n / result
+            PMF = combinatorie * self.p ** k * (1 - self.p) ** (self.n - k)
+            return PMF
+        return 0
