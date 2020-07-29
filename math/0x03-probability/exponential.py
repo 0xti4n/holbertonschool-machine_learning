@@ -22,7 +22,7 @@ class Exponential():
         """Calculates the value of the
         Probability Density Function
         for a given time period"""
-        if x >= 0:
+        if x > 0:
             PDF = self.lambtha * 2.7182818285 ** -self.lambtha * x
             return PDF
         return 0
@@ -31,7 +31,7 @@ class Exponential():
         """Calculates the value of the
         Cumulative Distribution Function
         for a given time period"""
-        if x >= 0:
+        if x > 0:
             CDF = 1 - 2.7182818285 ** -self.lambtha * x
             return CDF
         return 0
