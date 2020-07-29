@@ -14,10 +14,8 @@ class Exponential():
                 raise TypeError('data must be a list')
             if len(data) < 2:
                 raise ValueError('data must contain multiple values')
-            result = 0
-            for i in data:
-                result += i
-            new_lambtha = 1 / result * 100
+            result = sum(data) / len(data)
+            new_lambtha = 1 / result
             self.lambtha = new_lambtha
 
     def pdf(self, x):
