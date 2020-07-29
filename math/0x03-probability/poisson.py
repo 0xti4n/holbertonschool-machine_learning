@@ -20,9 +20,9 @@ class Poisson():
                 raise ValueError('lambtha must be a positive value')
         if data:
             if type(data) is not list:
-                raise ValueError('data must be a list')
+                raise TypeError('data must be a list')
             if len(data) < 2:
-                raise('data must contain multiple values')
+                raise ValueError('data must contain multiple values')
             new_lambtha = 0
             for i in data:
                 new_lambtha += i / len(data)
