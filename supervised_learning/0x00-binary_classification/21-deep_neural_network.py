@@ -129,8 +129,12 @@ class DeepNeuralNetwork():
             db = np.sum(error, axis=1, keepdims=True) / m
 
             if i == layers - 1:
-                self.__weights['W' + str(i+1)] -= alpha * dw.T
+                result = copy_weights['W' + str(i+1)] - alpha * dw.T
+                self.__weights['W' + str(i+1)] = result
 
             else:
-                self.__weights['W' + str(i+1)] -= alpha * dw
-            self.__weights['b' + str(i+1)] -= alpha * db
+                result = copy_weights['W' + str(i+1)] - alpha * dw
+                self.__weights['W' + str(i+1)] = result
+
+            result = copy_weights['b' + str(i+1)] - alpha * db
+            self.__weights['b' + str(i+1)] = result
