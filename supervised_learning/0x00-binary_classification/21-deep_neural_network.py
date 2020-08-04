@@ -8,6 +8,7 @@ def sigmoid_back(dz, cache):
     dS = cache * (1 - cache)
     return dz * dS
 
+
 def sigmoid(X):
     """sigmoid Activation"""
     return 1.0 / (1.0 + np.exp(-X))
@@ -124,7 +125,7 @@ class DeepNeuralNetwork():
                 dZ0 = np.matmul(copy_weights['W' + str(i+2)].T, error)
                 error = sigmoid_back(dZ0, cache['A' + str(i+1)])
                 dw = np.matmul(error, cache['A' + str(i)].T) / m
-            
+
             db = np.sum(error, axis=1, keepdims=True) / m
 
             if i == layers - 1:
