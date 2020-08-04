@@ -30,7 +30,7 @@ class DeepNeuralNetwork():
             if lidx == 0:
                 sqr = np.sqrt(2 / nx)
                 formula = np.random.randn(layers[lidx], nx) * sqr
-                self.weights['W1'] = formula
+                self.weights['W' + str(lidx+1)] = formula
             else:
                 sqr = np.sqrt(2 / layers[lidx - 1])
                 formula = np.random.randn(layers[lidx], layers[lidx - 1]) * sqr
