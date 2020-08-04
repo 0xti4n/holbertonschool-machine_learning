@@ -24,9 +24,9 @@ class DeepNeuralNetwork():
         self.__weights = {}
 
         for lidx in range(self.__L):
-            self.__weights['b' + str(lidx+1)] = np.zeros((layers[lidx], 1))
             if type(layers[lidx]) is not int or layers[lidx] < 1:
                 raise TypeError('layers must be a list of positive integers')
+            self.__weights['b' + str(lidx+1)] = np.zeros((layers[lidx], 1))
             if lidx == 0:
                 sqr = np.sqrt(2 / nx)
                 formula = np.random.randn(layers[lidx], nx) * sqr
