@@ -199,8 +199,8 @@ class DeepNeuralNetwork():
     def load(filename):
         """Loads a pickled
         DeepNeuralNetwork object"""
-        if filename:
+        try:
             fileObject = open(filename, 'rb')
             return pickle.load(fileObject)
-        else:
+        except FileNotFoundError:
             return None
