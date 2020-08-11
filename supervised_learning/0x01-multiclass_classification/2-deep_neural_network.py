@@ -189,18 +189,18 @@ class DeepNeuralNetwork():
         to a file in pickle format"""
 
         if '.pkl' not in filename:
-            filename = filename + '.' + 'pkl'
+            filename = filename + '.pkl'
 
-        fileObject = open(filename, 'wb')
-        pickle.dump(self, fileObject)
-        fileObject.close()
+        with open(filename, 'wb') as f:
+            pickle.dump(self, f)
 
     @staticmethod
     def load(filename):
         """Loads a pickled
         DeepNeuralNetwork object"""
         try:
-            fileObject = open(filename, 'rb')
-            return pickle.load(fileObject)
+            with open(filename, 'rb') as f:
+                data = pickle.load(f)
+            return data
         except FileNotFoundError:
             return None
