@@ -141,44 +141,42 @@ class DeepNeuralNetwork():
             result = copy_weights['b' + str(i+1)] - alpha * db
             self.__weights['b' + str(i+1)] = result
 
-    def train(self, X, Y, iterations=5000, alpha=0.05,
-              verbose=True, graph=True, step=100):
-        """Trains the deep neural network"""
-        if type(iterations) is not int:
-            raise TypeError('iterations must be an integer')
+    def train(self, X, Y, iterations=5000,
+              alpha=0.05, verbose=True, graph=True, step=100):
+        """trains the model"""
+        if type(iterations) != int:
+            raise TypeError("iterations must be an integer")
         if iterations < 0:
-            raise ValueError('iterations must be a positive integer')
-
-        if type(alpha) is not float:
-            raise TypeError('alpha must be a float')
+            raise ValueError("iterations must be a positive integer")
+        if type(alpha) != float:
+            raise TypeError("alpha must be a float")
         if alpha < 0:
-            raise ValueError('alpha must be positive')
-
+            raise ValueError("alpha must be positive")
         if verbose is True or graph is True:
-            if type(step) is not int:
-                raise TypeError('step must be an integer')
-            if step < 0 and step > iterations:
-                raise ValueError('step must be positive and <= iterations')
-
-        costs = []
+            if type(step) != int:
+                raise TypeError("step must be an integer")
+            if step < 0 or step > iterations:
+                raise ValueError("step must be positive and <= iterations")
+        _, cache = self.forward_prop(X)
+        cost_list = []
+        iter_x = []
         for i in range(iterations + 1):
-            A, _ = self.forward_prop(X)
-            cost = self.cost(Y, A)
-            costs.append(cost)
-            self.gradient_descent(Y, self.__cache, alpha=alpha)
-            if verbose is True:
-                if i % step == 0:
-                    print('Cost after {} iterations: {}'.format(i, cost))
-
-        if graph:
-            plt.xlabel('iteration')
-            plt.ylabel('cost')
-            plt.title('Training Cost')
-            plt.plot(np.arange(0, iterations + 1), costs)
-            """ plt.savefig('23-graphDNN.png') """
+            A, cost = self.evaluate(X, Y)
+            if verbose is True and (
+                    i % step == 0 or i == 0 or i == iterations):
+                print("Cost after {} iterations: {}".format(i, cost))
+                cost_list.append(cost)
+                iter_x.append(i)
+            if i != iterations:
+                self.gradient_descent(Y, cache, alpha)
+                _, cache = self.forward_prop(X)
+        if graph is True:
+            plt.plot(iter_x, cost_list)
+            plt.title("Training Cost")
+            plt.xlabel("iteration")
+            plt.ylabel("cost")
             plt.show()
-
-        return self.evaluate(X, Y)
+        return (A, cost)
 
     def save(self, filename):
         """Saves the instance object
