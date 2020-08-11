@@ -162,7 +162,7 @@ class DeepNeuralNetwork():
                 if self.__activation == 'sig':
                     error = sigmoid_back(dZ0, cache['A' + str(i+1)])
                 elif self.__activation == 'tanh':
-                    error = tanh_back(cache['A' + str(i+1)])
+                    error = tanh_f(cache['A' + str(i+1)])
                     error = dZ0 * error
                 dw = np.matmul(error, cache['A' + str(i)].T) / m
 
@@ -198,19 +198,15 @@ class DeepNeuralNetwork():
             if step < 0 and step <= iterations:
                 raise ValueError('step must be positive and <= iterations')
 
-        costs = np.zeros(iterations + 1, )
-        con = 0
+        costs = []
         for i in range(iterations + 1):
             A, _ = self.forward_prop(X)
             cost = self.cost(Y, A)
+            costs.append(cost)
             self.gradient_descent(Y, self.__cache, alpha=alpha)
-            if verbose is True and (con == step or i == 0):
-                print('Cost after {} iterations: {}'.format(i, cost))
-                con = 0
-
-            if graph:
-                costs[i] = cost
-            con += 1
+            if verbose is True:
+                if i % step == 0:
+                    print('Cost after {} iterations: {}'.format(i, cost))
 
         if graph:
             plt.xlabel('iteration')
@@ -226,7 +222,7 @@ class DeepNeuralNetwork():
         """Saves the instance object
         to a file in pickle format"""
 
-        if not filename.endswith('.pkl'):
+        if '.pkl' not in filename:
             filename = filename + '.pkl'
 
         with open(filename, 'wb') as f:
