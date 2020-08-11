@@ -121,10 +121,10 @@ class DeepNeuralNetwork():
     def evaluate(self, X, Y):
         """Evaluates the neural
         network’s predictions"""
-        self.forward_prop(X)
-        cost = self.cost(Y, self.__cache['A3'])
-        value = np.amax(self.__cache['A3'], axis=0)
-        predict = np.where(self.__cache['A3'] == value, 1, 0)
+        A, _ = self.forward_prop(X)
+        cost = self.cost(Y, A)
+        value = np.amax(A, axis=0)
+        predict = np.where(A == value, 1, 0)
         return predict, cost
 
     def gradient_descent(self, Y, cache, alpha=0.05):
@@ -162,7 +162,7 @@ class DeepNeuralNetwork():
         """Trains the deep neural network"""
         if type(iterations) is not int:
             raise TypeError('iterations must be an integer')
-        if iterations <= 0:
+        if iterations < 0:
             raise ValueError('iterations must be a positive integer')
 
         if type(alpha) is not float:
@@ -173,22 +173,18 @@ class DeepNeuralNetwork():
         if verbose is True or graph is True:
             if type(step) is not int:
                 raise TypeError('step must be an integer')
-            if step < 0 and step <= iterations:
+            if step < 0 and step > iterations:
                 raise ValueError('step must be positive and <= iterations')
 
-        costs = np.zeros(iterations + 1, )
-        con = 0
+        costs = []
         for i in range(iterations + 1):
             A, _ = self.forward_prop(X)
             cost = self.cost(Y, A)
+            costs.append(cost)
             self.gradient_descent(Y, self.__cache, alpha=alpha)
-            if verbose is True and (con == step or i == 0):
-                print('Cost after {} iterations: {}'.format(i, cost))
-                con = 0
-
-            if graph:
-                costs[i] = cost
-            con += 1
+            if verbose is True:
+                if i % step == 0:
+                    print('Cost after {} iterations: {}'.format(i, cost))
 
         if graph:
             plt.xlabel('iteration')
@@ -204,7 +200,7 @@ class DeepNeuralNetwork():
         """Saves the instance object
         to a file in pickle format"""
 
-        if not filename.endswith('.pkl'):
+        if '.pkl' not in filename:
             filename = filename + '.pkl'
 
         with open(filename, 'wb') as f:
