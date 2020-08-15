@@ -35,7 +35,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations, alpha,
                                           feed_dict={x: X_train, y: Y_train})
             v_loss, v_accuracy = sess.run([loss, accuracy],
                                           feed_dict={x: X_valid, y: Y_valid})
-            sess.run(t_op, feed_dict={x: X_train, y: Y_train})
+            if i < iterations:
+                sess.run(t_op, feed_dict={x: X_train, y: Y_train})
 
             if i % 100 == 0 or i == 0 or i == iterations:
                 print('After {} iterations:'.format(i))
