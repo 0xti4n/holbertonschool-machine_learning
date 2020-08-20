@@ -9,6 +9,6 @@ def batch_norm(Z, gamma, beta, epsilon):
     """
     mean = Z.mean(axis=0)
     variance = Z.var(axis=0)
-    z_n = (Z - mean) / (np.sqrt(variance) + epsilon)
+    z_n = (Z - mean) / np.sqrt(variance + epsilon)
     z = gamma * z_n + beta
     return z
