@@ -132,7 +132,6 @@ def model(Data_train, Data_valid, layers, activations, alpha=0.001, beta1=0.9,
     Y_valid = Data_valid[1]
 
     iterations = X_train.shape[0] // batch_size
-    terations = X_train.shape[0] // batch_size
     if iterations % batch_size != 0:
         iterations += 1
         flag = True
