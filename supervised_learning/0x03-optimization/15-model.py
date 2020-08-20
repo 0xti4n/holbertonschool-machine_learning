@@ -125,7 +125,6 @@ def model(Data_train, Data_valid, layers, activations, alpha=0.001, beta1=0.9,
     tf.add_to_collection('accuracy', accuracy)
     tf.add_to_collection('loss', loss)
     tf.add_to_collection('train_op', train_op)
-    tf.add_to_collection('alpha_new', alpha_new)
 
     X_train = Data_train[0]
     Y_train = Data_train[1]
