@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Model train"""
-import tensorflow as tf
+"""Batch normalization
+"""
 import numpy as np
+import tensorflow as tf
 
 
 def create_layer(prev, n, activation):
@@ -19,14 +20,18 @@ def create_batch_norm_layer(prev, n, activation):
     """creates a batch normalization layer
     for a neural network in tensorflow"""
     init = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
-    layer = tf.layers.Dense(units=n, kernel_initializer=init)
+    layer = tf.layers.Dense(units=n,
+                            activation=None,
+                            name='layer',
+                            kernel_initializer=init)
 
     out = layer(prev)
-    mean, var = tf.nn.moments(out, axes=0, keep_dims=True)
+    mean, var = tf.nn.moments(out, axes=0)
     gamma = tf.Variable(tf.constant(1.0, shape=[n]), trainable=True)
     beta = tf.Variable(tf.constant(0.0, shape=[n]), trainable=True)
+    epsilon = 1e-8
     norm = tf.nn.batch_normalization(out, mean, var, offset=beta, scale=gamma,
-                                     variance_epsilon=1e-8)
+                                     variance_epsilon=epsilon)
 
     if not activation:
         return norm
@@ -99,9 +104,10 @@ def shuffle_data(X, Y):
 def model(Data_train, Data_valid, layers, activations, alpha=0.001, beta1=0.9,
           beta2=0.999, epsilon=1e-8, decay_rate=1, batch_size=32, epochs=5,
           save_path='/tmp/model.ckpt'):
-    """builds, trains, and saves a neural network model in tensorflow using
+    """Builds, trains, and saves a neural network model in tensorflow using
     Adam optimization, mini-batch gradient descent, learning rate decay, and
-    batch normalization"""
+    batch normalization.
+    """
     nx = Data_train[0].shape[1]
     classes = Data_train[1].shape[1]
     x = tf.placeholder(tf.float32, shape=[None, nx], name='x')
@@ -167,4 +173,4 @@ def model(Data_train, Data_valid, layers, activations, alpha=0.001, beta1=0.9,
                         print('\t\tCost: {}'.format(new_c))
                         print('\t\tAccuracy: {}'.format(new_ac))
             sess.run(tf.assign(global_step, global_step + 1))
-        return new_saver.save(sess, save_path)
+        return saver.save(sess, save_path)
