@@ -25,18 +25,22 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
     m = Y.shape[1]
 
     error = cache["A" + str(L)] - Y
-    for i in range(L, 0, -1):
+    for i in reversed(range(1, L + 1)):
         w = "W" + str(i)
         b = "b" + str(i)
         A_p = cache["A" + str(i - 1)]
         A = cache["A" + str(i)]
         if i == L:
-            dw = (1 / m) * np.matmul(error, A_p.T) + lambtha / m * weights[w]
+            dw = np.matmul(error, A_p.T) / m + (lambtha * weights[w]) / m
             db = np.sum(error, axis=1, keepdims=True) / m
+            weights[w] = weights[w] - alpha * dw
+            weights[b] = weights[b] - alpha * db
+
         else:
-            w1 = weights["W" + str(i + 1)].T
-            error = np.matmul(w1, error) * (A * (1 - A))
-            dw = np.matmul(error, A_p.T) + lambtha / m * weights[w]
+            w_p = weights["W" + str(i)]
+            w1 = weights["W" + str(i + 1)]
+            error = np.matmul(w1.T, error) * (A * (1 - A))
+            dw = np.matmul(error, A_p.T) / m + (lambtha * w_p) / m
             db = np.sum(error, axis=1, keepdims=True) / m
 
             weights[w] = weights[w] - alpha * dw
