@@ -23,25 +23,30 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
     - The weights and biases of the network should be updated in place
     """
     m = Y.shape[1]
-
+    dw = {}
+    db = {}
     error = cache["A" + str(L)] - Y
     for i in reversed(range(1, L + 1)):
-        w = "W" + str(i)
-        b = "b" + str(i)
         A_p = cache["A" + str(i - 1)]
         A = cache["A" + str(i)]
+        w = "W" + str(i)
+        b = "b" + str(i)
         if i == L:
-            dw = np.matmul(error, A_p.T) / m + (lambtha * weights[w]) / m
-            db = np.sum(error, axis=1, keepdims=True) / m
-            weights[w] = weights[w] - alpha * dw
-            weights[b] = weights[b] - alpha * db
+            dw[w] = np.matmul(error, A_p.T) / m + (lambtha * weights[w]) / m
+            db[b] = np.sum(error, axis=1, keepdims=True) / m
 
         else:
+            dw_nxt = "W" + str(i + 1)
+            db_nxt = "b" + str(i + 1)
             w_p = weights["W" + str(i)]
-            w1 = weights["W" + str(i + 1)]
-            error = np.matmul(w1.T, error) * (A * (1 - A))
-            dw = np.matmul(error, A_p.T) / m + (lambtha * w_p) / m
-            db = np.sum(error, axis=1, keepdims=True) / m
+            w_nxt = weights["W" + str(i + 1)]
+            error = np.matmul(w_nxt.T, error) * (1 - (A * A))
+            dw[w] = np.matmul(error, A_p.T) / m + (lambtha * w_p) / m
+            db[b] = np.sum(error, axis=1, keepdims=True) / m
 
-            weights[w] = weights[w] - alpha * dw
-            weights[b] = weights[b] - alpha * db
+            weights[dw_nxt] -= alpha * dw[dw_nxt]
+            weights[db_nxt] -= alpha * db[db_nxt]
+
+            if i == 1:
+                weights['W1'] -= alpha * dw[w]
+                weights['b1'] -= alpha * db[b]
