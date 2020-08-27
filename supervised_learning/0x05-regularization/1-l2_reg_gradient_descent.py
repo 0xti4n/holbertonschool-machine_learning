@@ -3,12 +3,6 @@
 import numpy as np
 
 
-def tanh_f(Z):
-    """tanh activation"""
-    res = (np.exp(Z) - np.exp(-Z)) / (np.exp(Z) + np.exp(-Z))
-    return res
-
-
 def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
     """updates the weights and biases of a neural network using
     gradient descent with L2 regularization
@@ -28,7 +22,6 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         the last, which uses a softmax activation
     - The weights and biases of the network should be updated in place
     """
-    copy_weights = weights.copy()
     m = Y.shape[1]
 
     error = cache["A" + str(L)] - Y
@@ -41,8 +34,8 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
             dw = (1 / m) * np.matmul(error, A_p.T) + lambtha / m * weights[w]
             db = np.sum(error, axis=1, keepdims=True) / m
         else:
-            w1 = copy_weights["W" + str(i + 1)].T
-            error = np.matmul(w1, error) * tanh_f(A)
+            w1 = weights["W" + str(i + 1)].T
+            error = np.matmul(w1, error) * (A * (1 - A))
             dw = np.matmul(error, A_p.T) + lambtha / m * weights[w]
             db = np.sum(error, axis=1, keepdims=True) / m
 
