@@ -25,7 +25,7 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
     dw = {}
     db = {}
     error = cache["A" + str(L)] - Y
-    for i in range(L, 0, -1):
+    for i in reversed(range(1, L + 1)):
         w = 'W' + str(i)
         b = 'b' + str(i)
         A_p = cache['A' + str(i - 1)]
@@ -39,9 +39,9 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
             error = np.matmul(weights["W" + str(i + 1)].T, error)
             da2 = error * cache["D" + str(i)]
             da2 /= keep_prob
-            dz2 = da2 * (1 - (cache["A" + str(i)] * cache["A" + str(i)]))
-            dw[w] = np.matmul(dz2, A_p.T) / m
-            db[b] = np.sum(dz2, axis=1, keepdims=True) / m
+            error = da2 * (1 - (cache["A" + str(i)] * cache["A" + str(i)]))
+            dw[w] = np.matmul(error, A_p.T) / m
+            db[b] = np.sum(error, axis=1, keepdims=True) / m
 
             weights[dw_nxt] -= alpha * dw[dw_nxt]
             weights[db_nxt] -= alpha * db[db_nxt]
