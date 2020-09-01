@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Test"""
+"""Predict network"""
 import tensorflow.keras as K
 
 
