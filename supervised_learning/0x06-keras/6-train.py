@@ -9,10 +9,9 @@ def train_model(network, data, labels, batch_size, epochs,
     """train the model using early stopping"""
     params = []
     if validation_data and early_stopping:
-        early = K.callbacks.EarlyStopping(monitor='val_loss',
+        params.append(K.callbacks.EarlyStopping(monitor='val_loss',
                                           mode='min',
-                                          patience=patience)
-        params.append(early)
+                                          patience=patience))
 
     history = network.fit(x=data,
                           y=labels,
