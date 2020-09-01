@@ -12,11 +12,13 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
             model.add(K.layers.Dense(layers[i],
                       activation=activations[i],
                       kernel_regularizer=reg,
-                      input_dim=nx))
+                      input_dim=nx,
+                      name='dense'))
         else:
             model.add(K.layers.Dense(layers[i],
                       activation=activations[i],
-                      kernel_regularizer=reg))
+                      kernel_regularizer=reg,
+                      name='dense_{}'.format(str(i))))
 
         if i < len(layers) - 1:
             model.add(K.layers.Dropout(keep_prob))
