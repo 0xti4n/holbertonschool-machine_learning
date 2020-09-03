@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Convolution with Channels"""
 import numpy as np
-from math import ceil, floor
 
 
 def convolve(images, kernels, padding='same', stride=(1, 1)):
