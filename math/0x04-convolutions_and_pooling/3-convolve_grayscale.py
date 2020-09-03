@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Strided Convolution """
 import numpy as np
-from math import floor
 
 
 def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
@@ -35,14 +34,14 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
         p_0 = 0
         p_1 = 0
     elif padding == 'same':
-        p_0 = int((kh - 1) / 2)
-        p_1 = int((kw - 1) / 2)
+        p_0 = int(kh / 2)
+        p_1 = int(kw / 2)
     else:
         p_0 = padding[0]
         p_1 = padding[1]
 
-    output_h = int(floor(float(h + 2 * p_0 - kh) / float(sh))) + 1
-    output_w = int(floor(float(w + 2 * p_1 - kw) / float(sw))) + 1
+    output_h = int(h + 2 * p_0 - kh) / sh + 1
+    output_w = int(w + 2 * p_1 - kw) / sw + 1
     output = np.zeros((m, output_h, output_w))
     img = np.pad(images, ((0, 0), (p_0, p_0), (p_1, p_1)), 'constant')
 
