@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Valid Convolution"""
 import numpy as np
-from math import ceil, floor
 
 
 def convolve_grayscale_valid(images, kernel):
@@ -24,8 +23,8 @@ def convolve_grayscale_valid(images, kernel):
     h, w = images.shape[1], images.shape[2]
     kh, kw = kernel.shape[0], kernel.shape[1]
 
-    output_h = int(floor(float(h - kh + 1)))
-    output_w = int(floor(float(w - kw + 1)))
+    output_h = h - kh + 1
+    output_w = w - kw + 1
 
     output = np.zeros((m, output_h, output_w))
 
