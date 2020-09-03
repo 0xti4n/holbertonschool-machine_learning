@@ -23,8 +23,8 @@ def convolve_grayscale_same(images, kernel):
     h, w = images.shape[1], images.shape[2]
     kh, kw = kernel.shape[0], kernel.shape[1]
 
-    p_0 = kh / 2
-    p_1 = kw / 2
+    p_0 = int(kh / 2)
+    p_1 = int(kw / 2)
     output_h = h
     output_w = w
 
