@@ -35,7 +35,7 @@ def pool(images, kernel_shape, stride, mode='max'):
         for y in range(output_w):
             slc = images[:, x * sh:sh * x + kh, y * sw: sw * y + kw]
             if mode == 'max':
-                output[:, x, y] = slc.max(axis=(1, 2))
+                output[:, x, y] = slc.max(axis=1).max(axis=1)
             elif mode == 'avg':
-                output[:, x, y] = slc.mean(axis=(1, 2))
+                output[:, x, y] = slc.mean(axis=1).mean(axis=1)
     return output
