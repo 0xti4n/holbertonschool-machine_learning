@@ -23,10 +23,9 @@ def pool(images, kernel_shape, stride, mode='max'):
         -> avg indicates average pooling
     """
     m = images.shape[0]
-    h, w = images.shape[1], images.shape[2]
+    h, w, channels = images.shape[1], images.shape[2], images.shape[3]
     kh, kw = kernel_shape[0], kernel_shape[1]
     sh, sw = stride
-    channels = images.shape[3]
 
     output_h = int((h + 2 * p_0 - kh) / sh) + 1
     output_w = int((w + 2 * p_1 - kw) / sw) + 1
@@ -34,9 +33,9 @@ def pool(images, kernel_shape, stride, mode='max'):
 
     for x in range(output_h):
         for y in range(output_w):
-            slc = images[:, x * sh:sh * x + kh, y * sw: sw * y + kw, :]
+            slc = images[:, x * sh:sh * x + kh, y * sw: sw * y + kw]
             if mode == 'max':
                 output[:, x, y] = slc.max(axis=(1, 2))
             elif mode == 'avg':
-                output[:, x, y, :] = slc.mean(axis=(1, 2))
+                output[:, x, y] = slc.mean(axis=(1, 2))
     return output
