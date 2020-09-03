@@ -28,8 +28,8 @@ def pool(images, kernel_shape, stride, mode='max'):
     sh, sw = stride
     channels = images.shape[3]
 
-    output_h = int(floor(float(h - kh) / float(sh))) + 1
-    output_w = int(floor(float(w - kw) / float(sw))) + 1
+    output_h = int((h + 2 * p_0 - kh) / sh) + 1
+    output_w = int((w + 2 * p_1 - kw) / sw) + 1
     output = np.zeros((m, output_h, output_w, channels))
 
     for x in range(output_h):
