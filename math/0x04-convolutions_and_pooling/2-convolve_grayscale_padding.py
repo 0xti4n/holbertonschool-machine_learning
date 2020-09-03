@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Convolution with Padding"""
 import numpy as np
-from math import ceil, floor
 
 
 def convolve_grayscale_padding(images, kernel, padding):
@@ -28,8 +27,8 @@ def convolve_grayscale_padding(images, kernel, padding):
     p_0 = padding[0]
     p_1 = padding[1]
 
-    output_h = int(floor(float(h + 2 * P_0 - kh + 1)))
-    output_w = int(floor(float(w + 2 * P_1 - kw + 1)))
+    output_h = h + 2 * P_0 - kh + 1
+    output_w = w + 2 * P_1 - kw + 1
 
     output = np.zeros((m, output_h, output_w))
 
