@@ -4,7 +4,7 @@ import numpy as np
 
 
 def pool_forward(A_prev, kernel_shape, stride=(1, 1), mode='max'):
-    """"""
+    """perform pool forward prop"""
 
     m = A_prev.shape[0]
     m, h_prev, w_prev, c_prev = A_prev.shape
