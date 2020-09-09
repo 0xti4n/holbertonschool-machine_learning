@@ -51,12 +51,11 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     output = np.zeros((m, output_h, output_w, c_new))
     img = np.pad(A_prev, ((0, 0), (p_0, p_0), (p_1, p_1), (0, 0)), 'constant')
 
-    for ch in range(c_new):
-        for x in range(output_h):
-            for y in range(output_w):
+    for x in range(output_h):
+        for y in range(output_w):
+            for ch in range(c_new):
                 slc = img[:, x * sh:sh * x + kh, y * sw: sw * y + kw, :]
-                r = np.sum(W[..., ch] * slc,
-                           axis=1).sum(axis=1).sum(axis=1)
+                r = np.sum(W[..., ch] * slc, axis=1).sum(axis=1).sum(axis=1)
                 output[:, x, y, ch] = activation(r + b[0, 0, 0, ch])
 
     return output
