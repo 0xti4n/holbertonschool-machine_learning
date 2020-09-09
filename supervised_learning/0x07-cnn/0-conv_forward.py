@@ -39,8 +39,9 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     kh, kw, c_prev, c_new = W.shape
     sh, sw = stride
 
-    p_0 = 0
-    p_1 = 0
+    if padding == 'valid':
+        p_0 = 0
+        p_1 = 0
 
     if padding == 'same':
         p_0 = int(((h_prev - 1) * sh + kh - h_prev) / 2) + 1
