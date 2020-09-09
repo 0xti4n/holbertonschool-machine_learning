@@ -15,21 +15,20 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     st1 = stride[1]
     st0 = stride[0]
 
-    if padding == 'valid':
-        p_0 = 0
-        p_1 = 0
+    if padding == "valid":
+        pad0 = 0
+        pad1 = 0
     else:
-        p_0 = int(((hm - 1) * st0 + hk - hm) / 2) + 1
-        p_1 = int(((wm - 1) * st1 + wk - wm) / 2) + 1
+        pad0 = int(((hm - 1) * st0 + hk - hm) / 2) + 1
+        pad1 = int(((wm - 1) * st1 + wk - wm) / 2) + 1
+    out_h = int((hm + 2 * pad0 - hk) / st0) + 1
+    out_w = int((wm + 2 * pad1 - wk) / st1) + 1
+    x_pad = np.pad(A_prev, ((0, 0), (pad0, pad0), (
+                           pad1, pad1), (0, 0)), 'constant')
 
-    db = np.sum(dZ, axis=(0, 1, 2), keepdims=True)
-    out_h = int((hm + 2 * p_0 - hk) / st0) + 1
-    out_w = int((wm + 2 * p_1 - wk) / st1) + 1
-    img = np.pad(A_prev, ((0, 0), (p_0, p_0), (p_1, p_1), (0, 0)), 'constant')
-
-    dX = np.zeros(img.shape)
+    dX = np.zeros(x_pad.shape)
     dW = np.zeros(W.shape)
-
+    db = np.sum(dZ, axis=(0, 1, 2), keepdims=True)
     for i in range(m):
         for h in range(out_h):
             for w in range(out_w):
@@ -37,9 +36,9 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
                     dX[i, h * st0: h * st0 + hk,
                        w * st1: w * st1 + wk, :] += dZ[
                        i, h, w, c] * W[:, :, :, c]
-                    dW[:, :, :, c] += img[i, h * st0: h * st0 + hk,
-                                          w * st1: w * st1 + wk,
-                                          :] * dZ[i, h, w, c]
+                    dW[:, :, :, c] += x_pad[i, h * st0: h * st0 + hk,
+                                            w * st1: w * st1 + wk,
+                                            :] * dZ[i, h, w, c]
     if padding == "same":
         dX = dX[:, pad0:-pad0, pad1:-pad1, :]
 
