@@ -7,7 +7,7 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     """performs back propagation over a convolutional
     layer of a neural network"""
     kh, kw, c_prev, c_new = W.shape
-    _, h_new, w_new, c_new = dZ.shape
+    _, h_new, w_new, c_nw = dZ.shape
     m, h_prev, w_prev, c_prev = A_prev.shape
     sh, sw = stride
 
@@ -33,17 +33,12 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
                 for k in range(c_new):
                     dx[i,
                         h * sh:h * sh + kh,
-                        w * sw:w * sw + kw, :] += W[:,
-                                                    :,
-                                                    :,
-                                                    k] * dZ[i, h, w, k]
-                    dW[:,
-                       :,
-                       :,
-                       k] += img[i,
-                                 h * sw:h * sw + kh,
-                                 w * sw:w * sw + kw, :] * dZ[i, h, w, k]
-
+                        w * sw:w * sw + kw, :] += W[:, :, :, k] * dZ[
+                            i, h, w, k]
+                    dW[:, :, :, k] += img[i,
+                                          h * sw:h * sw + kh,
+                                          w * sw:w * sw + kw, :] * dZ[
+                                              i, h, w, k]
     if padding == 'same':
         dx = dx[:, p_0:-p_0, p_1:-p_1, :]
 
