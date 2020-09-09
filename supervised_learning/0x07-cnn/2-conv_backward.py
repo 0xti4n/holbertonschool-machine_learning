@@ -15,18 +15,18 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     st1 = stride[1]
     st0 = stride[0]
 
-    p_0 = 0
-    p_1 = 0
-
-    if padding == 'same':
+    if padding == 'valid':
+        p_0 = 0
+        p_1 = 0
+    else:
         p_0 = int(((hm - 1) * st0 + hk - hm) / 2) + 1
         p_1 = int(((wm - 1) * st1 + wk - wm) / 2) + 1
-    
+
     db = np.sum(dZ, axis=(0, 1, 2), keepdims=True)
     out_h = int((hm + 2 * p_0 - hk) / st0) + 1
     out_w = int((wm + 2 * p_1 - wk) / st1) + 1
     img = np.pad(A_prev, ((0, 0), (p_0, p_0), (p_1, p_1), (0, 0)), 'constant')
-    
+
     dX = np.zeros(img.shape)
     dW = np.zeros(W.shape)
 
