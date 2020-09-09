@@ -36,7 +36,6 @@ def pool_backward(dA, A_prev, kernel_shape, stride=(1, 1), mode='avg'):
     previous layer (dA_prev)
     """
     kh, kw = kernel_shape
-    _, h_new, w_new, c = dA.shape
     m, h_prev, w_prev, ch = A_prev.shape
     sh, sw = stride
 
@@ -51,11 +50,11 @@ def pool_backward(dA, A_prev, kernel_shape, stride=(1, 1), mode='avg'):
                 for k in range(ch):
                     if mode == 'max':
                         tmp = A_prev[i, h * sh:h * sh + kh,
-                                     w * sw:w * sw + kh, k]
+                                     w * sw:w * sw + kw, k]
                         mask = tmp == tmp.max()
                         pd[i, h * sh:h * sh + kh,
                            w * sw:w * sw + kw, k] += dA[i, h, w, k] * mask
-                    if mode == 'avg':
+                    else:
                         pd[i, h * sh:h * sh + kh,
                            w * sw:w * sw + kw, k] += dA[i, h, w, k] / (kh * kw)
     return pd
