@@ -18,7 +18,7 @@ def densenet121(growth_rate=32, compression=1.0):
     -> All weights use he normal initialization
     -> Returns: the keras model
     """
-    X = K.Input(shape=(224, 224, 3))
+    X = K.layers.Input(shape=(224, 224, 3))
 
     x = K.layers.BatchNormalization(axis=3)(X)
     x = K.layers.Activation('relu')(x)
@@ -26,7 +26,6 @@ def densenet121(growth_rate=32, compression=1.0):
     x = K.layers.Conv2D(filters=2*growth_rate,
                         kernel_size=7,
                         padding='same',
-                        activation='relu',
                         kernel_initializer='he_normal',
                         strides=2)(x)
 
