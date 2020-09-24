@@ -26,6 +26,9 @@ if __name__ == "__main__":
     model.add(base_model)
     model.add(K.layers.Flatten())
     model.add(K.layers.BatchNormalization())
+    model.add(K.layers.Dense(256, activation='relu'))
+    model.add(K.layers.Dropout(0.5))
+    model.add(K.layers.BatchNormalization())
     model.add(K.layers.Dense(128, activation='relu'))
     model.add(K.layers.Dropout(0.5))
     model.add(K.layers.BatchNormalization())
@@ -40,7 +43,7 @@ if __name__ == "__main__":
 
     history = model.fit(x_train, y_train,
                         batch_size=32,
-                        epochs=5,
+                        epochs=10,
                         validation_data=(x_test, y_test),
                         shuffle=True,
                         verbose=1)
