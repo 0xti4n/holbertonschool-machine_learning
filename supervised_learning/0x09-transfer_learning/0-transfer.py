@@ -17,10 +17,12 @@ if __name__ == "__main__":
     x_train, y_train = preprocess_data(x_train, y_train)
     x_test, y_test = preprocess_data(x_test, y_test)
 
+    inputs = K.Input(shape=(224, 224, 3))
     base_model = K.applications.ResNet50(include_top=False,
                                          weights="imagenet",
-                                         input_shape=(224, 224, 3))
+                                         input_tensor=inputs)
 
+    base_model.trainable = False
     model = K.models.Sequential()
     model.add(K.layers.UpSampling2D((7, 7)))
     model.add(base_model)
@@ -37,12 +39,13 @@ if __name__ == "__main__":
     model.add(K.layers.BatchNormalization())
     model.add(K.layers.Dense(10, activation='softmax'))
 
-    model.compile(optimizer='adam',
+    opt = K.optimizers.Adam(lr=1e-5)
+    model.compile(optimizer=opt,
                   loss='binary_crossentropy',
                   metrics=['acc'])
 
     history = model.fit(x_train, y_train,
-                        batch_size=32,
+                        batch_size=256,
                         epochs=10,
                         validation_data=(x_test, y_test),
                         shuffle=True,
