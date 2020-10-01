@@ -106,10 +106,10 @@ class Yolo():
             ph = self.anchors[i, :, 1]
             bw = pw * np.exp(t_w)
             bh = ph * np.exp(t_h)
-            modelInput_w = self.model.input.shape[1].value
-            modelInput_h = self.model.input.shape[2].value
-            bw = bw / modelInput_w
-            bh = bh / modelInput_h
+            """modelInput_w = self.model.input.shape[1].value
+            modelInput_h = self.model.input.shape[2].value"""
+            bw = bw / 416
+            bh = bh / 416
             x1 = bx - bw / 2
             y1 = by - bh / 2
             x2 = x1 + bw
