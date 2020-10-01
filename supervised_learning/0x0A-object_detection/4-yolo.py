@@ -173,7 +173,7 @@ class Yolo():
         return f, clas, b_c_s
 
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
-        """"""
+        """non_max"""
         x1 = filtered_boxes[:, 0]
         y1 = filtered_boxes[:, 1]
         x2 = filtered_boxes[:, 2]
