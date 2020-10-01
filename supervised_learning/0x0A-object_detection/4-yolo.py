@@ -196,7 +196,7 @@ class Yolo():
     def load_images(folder_path):
         """Load images
         """
-        img = glob.glob(folder_path + "/*")
+        img = glob.glob(folder_path + "/*.jpg")
         data_p = [cv2.imread(i) for i in img]
 
         return data_p, np.array(img)
