@@ -91,7 +91,7 @@ class Yolo():
             anchor_boxes = box.shape[2]
             grid = np.zeros((g_H, g_W, anchor_boxes))
             I_y = np.arange(g_H).reshape(g_H, 1, 1)
-            I_x = np.arange(g_W).reshape(g_W, 1, 1)
+            I_x = np.arange(g_W).reshape(1, g_W, 1)
             c_y = grid + I_y
             c_x = grid + I_x
             t_x = sigmoid(box[..., 0])
