@@ -181,42 +181,6 @@ class Yolo():
         _, number_counts = np.lib.arraysetops.unique(predict_box_classes,
                                                      return_counts=True)
 
-        i = 0
-        acummulated = 0
-        for number_count in number_counts:
-            while i < acummulated + number_count:
-                j = i + 1
-                while j < acummulated + number_count:
-                    b_p1 = box_predictions[i]
-                    b_p2 = box_predictions[j]
-
-                    x_x1 = np.maximum(b_p1[0], b_p2[0])
-                    y_y1 = np.maximum(b_p1[1], b_p2[1])
-                    x_x2 = np.minimum(b_p1[2], b_p2[2])
-                    y_y2 = np.minimum(b_p1[3], b_p2[3])
-
-                    inter_area = (y_y2 - y_y1) * (x_x2 - x_x1)
-
-                    box1_area = (b_p1[3] - b_p1[1]) * (b_p1[2] - b_p1[0])
-                    box2_area = (b_p2[3] - b_p2[1]) * (b_p2[2] - b_p2[0])
-                    union_area = box1_area + box2_area - inter_area
-
-                    iou = inter_area / union_area
-
-                    if iou > self.nms_t:
-                        box_predictions = np.delete(box_predictions,
-                                                    j, axis=0)
-                        predict_box_scores = np.delete(predict_box_scores,
-                                                       j, axis=0)
-                        predict_box_classes = np.delete(predict_box_classes,
-                                                        j, axis=0)
-                        number_count -= 1
-                    else:
-                        j += 1
-                i += 1
-            acummulated += number_count
-        return box_predictions, predict_box_classes, predict_box_scores
-
     @staticmethod
     def load_images(folder_path):
         """Load images
