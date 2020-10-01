@@ -235,11 +235,12 @@ class Yolo():
 
         for img in images:
             shape = img.shape[:2]
-            images_shape.append(np.array(shape))
+            images_shape.append(shape)
             img_resize = cv2.resize(img, (modelInput_w, modelInput_h),
-                                    fx=0, fy=1,
                                     interpolation=cv2.INTER_CUBIC)
-            list_resize.append(img_resize)
+
+            scale = img_resize / 255
+            list_resize.append(scale)
 
         list_resize = np.array(list_resize)
         images_shape = np.array(images_shape)
