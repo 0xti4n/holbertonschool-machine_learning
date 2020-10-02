@@ -176,8 +176,8 @@ class Yolo():
         box_predictions = filtered_boxes[index]
         predict_box_classes = box_classes[index]
         predict_box_scores = box_scores[index]
-        _, n_classes = np.lib.arraysetops.unique(predict_box_classes,
-                                                 return_counts=True)
+        _, n_classes = np.unique(predict_box_classes,
+                                 return_counts=True)
 
         i = 0
         con = 0
@@ -187,13 +187,12 @@ class Yolo():
                 while j < con + n_class:
                     b_p1 = box_predictions[i]
                     b_p2 = box_predictions[j]
+                    x_x1 = max(b_p1[0], b_p2[0])
+                    y_y1 = max(b_p1[1], b_p2[1])
+                    x_x2 = min(b_p1[2], b_p2[2])
+                    y_y2 = min(b_p1[3], b_p2[3])
 
-                    x_x1 = np.maximum(b_p1[0], b_p2[0])
-                    y_y1 = np.maximum(b_p1[1], b_p2[1])
-                    x_x2 = np.minimum(b_p1[2], b_p2[2])
-                    y_y2 = np.minimum(b_p1[3], b_p2[3])
-
-                    inter_area = (y_y2 - y_y1) * (x_x2 - x_x1)
+                    inter_area = max(y_y2 - y_y1, 0) * max(x_x2 - x_x1, 0)
 
                     box1_area = (b_p1[3] - b_p1[1]) * (b_p1[2] - b_p1[0])
                     box2_area = (b_p2[3] - b_p2[1]) * (b_p2[2] - b_p2[0])
