@@ -173,13 +173,48 @@ class Yolo():
         return f, clas, b_c_s
 
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
-        """non_max"""
+        """non_max suppression"""
         index = np.lexsort((-box_scores, box_classes))
         box_predictions = filtered_boxes[index]
         predict_box_classes = box_classes[index]
         predict_box_scores = box_scores[index]
-        _, number_counts = np.lib.arraysetops.unique(predict_box_classes,
-                                                     return_counts=True)
+        _, n_classes = np.unique(predict_box_classes,
+                                 return_counts=True)
+
+        i = 0
+        con = 0
+        for n_class in n_classes:
+            while i < con + n_class:
+                j = i + 1
+                while j < con + n_class:
+                    b_p1 = box_predictions[i]
+                    b_p2 = box_predictions[j]
+                    x_x1 = max(b_p1[0], b_p2[0])
+                    y_y1 = max(b_p1[1], b_p2[1])
+                    x_x2 = min(b_p1[2], b_p2[2])
+                    y_y2 = min(b_p1[3], b_p2[3])
+
+                    inter_area = max(y_y2 - y_y1, 0) * max(x_x2 - x_x1, 0)
+
+                    box1_area = (b_p1[3] - b_p1[1]) * (b_p1[2] - b_p1[0])
+                    box2_area = (b_p2[3] - b_p2[1]) * (b_p2[2] - b_p2[0])
+                    union_area = box1_area + box2_area - inter_area
+
+                    iou = inter_area / union_area
+
+                    if iou > self.nms_t:
+                        box_predictions = np.delete(box_predictions,
+                                                    j, axis=0)
+                        predict_box_scores = np.delete(predict_box_scores,
+                                                       j, axis=0)
+                        predict_box_classes = np.delete(predict_box_classes,
+                                                        j, axis=0)
+                        n_class -= 1
+                    else:
+                        j += 1
+                i += 1
+            con += n_class
+        return box_predictions, predict_box_classes, predict_box_scores
 
     @staticmethod
     def load_images(folder_path):
