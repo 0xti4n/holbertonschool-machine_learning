@@ -75,9 +75,6 @@ def inverse(matrix):
     if any([len(i) != len(A) for i in matrix]):
         raise ValueError('matrix must be a non-empty square matrix')
 
-    if len(A) == 1 and len(A[0]) == 1:
-        return [[1]]
-
     n = len(A)
     new = [cpy[:] for cpy in A]
 
@@ -88,7 +85,6 @@ def inverse(matrix):
 
     find_inverse = transpose(new)
     det = determinant(A)
-
     if det == 0:
         return None
 
