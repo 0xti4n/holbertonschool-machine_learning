@@ -59,17 +59,24 @@ def minor(matrix):
     -> Returns: the minor matrix of matrix
     """
     A = matrix
-    n = len(A)
-    new = [cpy[:] for cpy in A]
 
     if type(A) is not list or len(A) == 0:
+        raise TypeError('matrix must be a list of lists')
+
+    if all([type(i) is list for i in A]) is False:
         raise TypeError('matrix must be a list of lists')
 
     if len(A) != len(A[0]) or len(A[0]) == 0:
         raise ValueError('matrix must be a non-empty square matrix')
 
+    if any([len(i) != len(A) for i in matrix]):
+        raise ValueError('matrix must be a non-empty square matrix')
+
     if len(A) == 1 and len(A[0]) == 1:
         return [[1]]
+
+    n = len(A)
+    new = [cpy[:] for cpy in A]
 
     for idx in range(n):
         for j in range(n):
