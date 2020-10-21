@@ -19,17 +19,24 @@ def determinant(matrix):
     -> Returns: the determinant of matrix
     """
     A = matrix
-    n = len(A)
-    A_copy = A.copy()
 
-    if len(A) == 0:
+    if type(A) is not list or len(A) == 0:
         raise TypeError('matrix must be a list of lists')
 
-    if len(A[0]) == 0:
+    if all([type(i) is list for i in A]) is False:
+        raise TypeError('matrix must be a list of lists')
+
+    if A[0] and len(A) != len(A[0]):
+        raise ValueError('matrix must be a square matrix')
+
+    if A == [[]]:
         return 1
 
-    if len(A) != len(A[0]):
-        raise ValueError('matrix must be a square matrix')
+    if len(A) == 1:
+        return A[0][0]
+
+    n = len(A)
+    A_copy = A.copy()
 
     for idx in range(n):
         if A_copy[idx][idx] == 0:
