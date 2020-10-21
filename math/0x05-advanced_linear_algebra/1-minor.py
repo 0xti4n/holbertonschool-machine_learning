@@ -62,11 +62,14 @@ def minor(matrix):
     n = len(A)
     new = [cpy[:] for cpy in A]
 
-    if len(A) == 0:
+    if type(A) is not list or len(A) == 0:
         raise TypeError('matrix must be a list of lists')
 
     if len(A) != len(A[0]) or len(A[0]) == 0:
         raise ValueError('matrix must be a non-empty square matrix')
+
+    if len(A) == 1 and len(A[0]) == 1:
+        return [[1]]
 
     for idx in range(n):
         for j in range(n):
