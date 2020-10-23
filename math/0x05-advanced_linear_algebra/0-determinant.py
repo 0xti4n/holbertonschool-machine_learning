@@ -2,6 +2,11 @@
 """Determinant"""
 
 
+def Minor(A, i, j):
+    """MINOR"""
+    return [row[:j] + row[j+1:] for row in (A[:i]+A[i+1:])]
+
+
 def determinant(matrix):
     """calculates the determinant of a matrix:
 
@@ -39,18 +44,8 @@ def determinant(matrix):
         return A[0][0] * A[1][1] - A[0][1] * A[1][0]
 
     n = len(A)
-    A_copy = A.copy()
 
-    for idx in range(n):
-        if A_copy[idx][idx] == 0:
-            A_copy[idx][idx] = 0
-        for i in range(idx + 1, n):
-            number = A_copy[i][idx] / A_copy[idx][idx]
-            for j in range(n):
-                A_copy[i][j] = A_copy[i][j] - number * A_copy[idx][j]
-
-    product = 1
-    for i in range(n):
-        product *= A_copy[i][i]
-
-    return round(product)
+    det = 0
+    for c in range(n):
+        det += ((-1)**c)*A[0][c]*determinant(Minor(A, 0, c))
+    return det
