@@ -29,10 +29,6 @@ def mean_cov(X):
 
     n, d = X.shape
     mean = X.mean(axis=0)
-    cov = np.zeros((d, d))
-    for i in range(d):
-        for j in range(d):
-            cov[i, j] += np.matmul(X[:, i] - mean[i], X[:, j] - mean[j])
-
-    cov = cov / (n - 1)
+    X = X - mean
+    cov = X.T.dot(X) / (n - 1)
     return mean, cov
