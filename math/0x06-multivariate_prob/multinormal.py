@@ -50,10 +50,10 @@ class MultiNormal():
 
         N = x.size
 
-        tmp1 = np.linalg.det(self.cov) ** (-1/2)
-        mul1 = -.5 * (x - self.mean).T
-        tmp2 = np.exp(mul1 @ np.linalg.inv(self.cov) @ (x - self.mean))
+        det = np.linalg.det(self.cov)
+        x = x - self.mean
+        exp = np.exp(-(np.linalg.solve(self.cov, x).T.dot(x) / 2))
 
-        res = (2 * np.pi) ** (-N/2) * tmp1 * tmp2
+        res = 1. / np.sqrt((2 * np.pi) ** N * det) * exp
 
         return np.squeeze(res)
