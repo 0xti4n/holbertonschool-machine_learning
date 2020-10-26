@@ -20,7 +20,7 @@ def correlation(C):
     if type(C) is not np.ndarray:
         raise TypeError('C must be a numpy.ndarray')
 
-    if len(C) != len(C[0]) or len(C.shape) != 2:
+    if C.shape[0] != C.shape[1] or len(C.shape) != 2:
         raise ValueError('C must be a 2D square matrix')
 
     v = np.sqrt(np.diag(C))
