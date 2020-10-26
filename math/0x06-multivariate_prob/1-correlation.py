@@ -17,10 +17,10 @@ def correlation(C):
     -> Returns a numpy.ndarray of shape (d, d)
         containing the correlation matrix
     """
-    if type(C) is not np.ndarray or len(C.shape) != 2:
+    if type(C) is not np.ndarray:
         raise TypeError('C must be a numpy.ndarray')
 
-    if len(C) != len(C[0]):
+    if len(C) != len(C[0]) or len(C.shape) != 2:
         raise ValueError('C must be a 2D square matrix')
 
     v = np.sqrt(np.diag(C))
