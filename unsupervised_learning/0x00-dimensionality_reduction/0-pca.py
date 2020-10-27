@@ -24,6 +24,6 @@ def pca(X, var=0.95):
 
     cumumlative_var = np.cumsum(s) / np.sum(s)
     r = np.argwhere(cumumlative_var >= var)
-    r = r[0][0] + 1
+    r = r[0, 0] + 1
 
     return vh[:r].T
