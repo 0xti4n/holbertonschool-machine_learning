@@ -23,6 +23,6 @@ def pca(X, var=0.95):
     u, s, vh = np.linalg.svd(X)
 
     cumumlative_var = np.cumsum(s) / np.sum(s)
-    idx = np.argwhere(cumumlative_var >= var)[0, 0]
+    idx = np.where(cumumlative_var >= var)[0][0]
 
     return vh[:idx + 1].T
