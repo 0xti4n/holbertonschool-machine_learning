@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PCA"""
+"""PCA principal components analysis"""
 import numpy as np
 
 
