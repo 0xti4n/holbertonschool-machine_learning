@@ -15,12 +15,11 @@ def pca(X, ndim):
     -> Returns: T, a numpy.ndarray of shape (n, ndim)
         containing the transformed version of X
     """
-    n, d = X.shape
 
     X_m = X - X.mean(axis=0)
     u, s, v = np.linalg.svd(X_m)
-    W = v[:ndim]
+    W = v[:ndim].T
 
-    T = np.matmul(X_m, W.T)
+    T = np.matmul(X_m, W)
 
     return T
