@@ -33,6 +33,7 @@ def P_init(X, perplexity):
     a = np.sum(X * X, 1)
     b = np.repeat(a[:, np.newaxis], n, axis=1)
     D = b + b.T - 2 * X.dot(X.T)
+    np.fill_diagonal(D, 0.)
 
     P = np.zeros((n, n))
 
