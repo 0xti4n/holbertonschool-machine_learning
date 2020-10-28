@@ -20,9 +20,10 @@ def pca(X, var=0.95):
     -> W is a numpy.ndarray of shape (d, nd) where nd is
         the new dimensionality of the transformed X
     """
-    u, s, vh = np.linalg.svd(X)
+    u, s, v = np.linalg.svd(X)
 
     cumumlative_var = np.cumsum(s) / np.sum(s)
     idx = np.where(cumumlative_var >= var)[0][0]
+    v = v[:idx + 1]
 
-    return vh[:idx + 1].T
+    return v.T
