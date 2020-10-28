@@ -38,13 +38,13 @@ def P_affinities(X, tol=1e-5, perplexity=30.0):
 
         while np.abs(H_dif) > tol:
             if H_dif > 0:
-                low = betas[i].copy()
+                low = betas[i, 0]
                 if high is None:
                     betas[i] = betas[i] * 2.
                 else:
                     betas[i] = (betas[i] + high) / 2.
             else:
-                high = betas[i].copy()
+                high = betas[i, 0]
                 if low is None:
                     betas[i] = betas[i] / 2.
                 else:
@@ -55,5 +55,4 @@ def P_affinities(X, tol=1e-5, perplexity=30.0):
 
         P[i, :i] = Pi[:i]
         P[i, i+1:] = Pi[i:]
-        p = (P + P.T) / (2 * n)
-    return P
+    return (P + P.T) / (2 * n)
