@@ -38,21 +38,22 @@ def P_affinities(X, tol=1e-5, perplexity=30.0):
 
         while np.abs(H_dif) > tol:
             if H_dif > 0:
-                low = betas[i, 0]
+                low = betas[i].copy()
                 if high is None:
-                    betas[i] = betas[i] * 2.
+                    betas[i] = betas[i] * 2
                 else:
-                    betas[i] = (betas[i] + high) / 2.
+                    betas[i] = (betas[i] + high) / 2
             else:
-                high = betas[i, 0]
+                high = betas[i].copy()
                 if low is None:
-                    betas[i] = betas[i] / 2.
+                    betas[i] = betas[i] / 2
                 else:
-                    betas[i] = (betas[i] + low) / 2.
+                    betas[i] = (betas[i] + low) / 2
 
             Hi, Pi = HP(Di, betas[i])
             H_dif = Hi - H
 
         P[i, :i] = Pi[:i]
         P[i, i+1:] = Pi[i:]
-    return (P + P.T) / (2 * n)
+    P = (P + P.T) / (2 * n)
+    return P
