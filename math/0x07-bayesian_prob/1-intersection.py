@@ -34,7 +34,7 @@ def intersection(x, n, P, Pr):
     if type(P) is not np.ndarray or len(P.shape) != 1:
         raise TypeError('P must be a 1D numpy.ndarray')
 
-    if type(Pr) is not np.ndarray or len(Pr.shape) != len(P.shape):
+    if type(Pr) is not np.ndarray or Pr.shape != P.shape:
         msg = 'Pr must be a numpy.ndarray with the same shape as P'
         raise TypeError(msg)
 
