@@ -21,10 +21,10 @@ def posterior(x, n, p1, p2):
     -> Returns: the posterior probability that p is within
         the range [p1, p2] given x and n
     """
-    if not isinstance(n, (int, float)) or n < 0:
+    if not isinstance(n, int) or n <= 0:
         raise ValueError('n must be a positive integer')
 
-    if not isinstance(x, (int, float)) or x < 0:
+    if not isinstance(x, int) or x < 0:
         msg = 'x must be an integer that is greater than or equal to 0'
         raise ValueError(msg)
 
