@@ -73,4 +73,8 @@ def kmeans(X, k, iterations=1000):
         if (cpy == centroids).all():
             return centroids, clss
 
+    substrac = X[:, None] - centroids
+    D = np.linalg.norm(substrac, axis=-1)
+    clss = np.argmin(D, axis=-1)
+
     return centroids, clss
