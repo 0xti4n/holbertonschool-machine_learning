@@ -30,5 +30,5 @@ def variance(X, C):
         var = np.sum(D ** 2)
 
         return var
-    except:
+    except ValueError:
         return None
