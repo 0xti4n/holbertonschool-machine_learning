@@ -30,11 +30,18 @@ def pdf(X, m, S):
     if not isinstance(S, np.ndarray) or len(S.shape) != 2:
         return None
 
+    if S.shape[0] != S.shape[1]:
+        return None
+
+    if X.shape[1] != m.shape[0]:
+        return None
+
     """https://scipython.com/blog/
         visualizing-the-bivariate-gaussian-distribution/"""
     """https://pythonrobotics.readthedocs.io/
         en/latest/modules/appendix.html"""
 
+    print(m)
     d = m.shape[0]
 
     X_m = X - m
