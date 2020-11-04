@@ -47,7 +47,7 @@ def expectation(X, pi, m, S):
     if pi.shape[0] != m.shape[0] or pi.shape[0] != S.shape[0]:
         return None, None
 
-    if np.isclose(pi.sum(0), 1) is False:
+    if not np.isclose(pi.sum(0), 1):
         return None, None
 
     n, d = X.shape
