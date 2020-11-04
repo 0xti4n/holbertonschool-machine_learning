@@ -41,7 +41,6 @@ def pdf(X, m, S):
     """https://pythonrobotics.readthedocs.io/
         en/latest/modules/appendix.html"""
 
-    print(m)
     d = m.shape[0]
 
     X_m = X - m
