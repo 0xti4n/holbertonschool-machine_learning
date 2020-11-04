@@ -20,8 +20,6 @@ def expectation(X, pi, m, S):
     -> S is a numpy.ndarray of shape (k, d, d)
         containing the covariance matrices for each cluster
 
-    -> You may use at most 1 loop
-
     -> Returns: g, l, or None, None on failure
         * g is a numpy.ndarray of shape (k, n)
             containing the posterior probabilities
@@ -38,6 +36,18 @@ def expectation(X, pi, m, S):
         return None, None
 
     if not isinstance(S, np.ndarray) or len(S.shape) != 3:
+        return None, None
+
+    if X.shape[1] != m.shape[1] or X.shape[1] != S.shape[1]:
+        return None, None
+
+    if X.shape[1] != S.shape[2]:
+        return None, None
+
+    if pi.shape[0] != m.shape[0] or pi.shape[0] != S.shape[0]:
+        return None, None
+
+    if pi.sum(0) != 1:
         return None, None
 
     n, d = X.shape
