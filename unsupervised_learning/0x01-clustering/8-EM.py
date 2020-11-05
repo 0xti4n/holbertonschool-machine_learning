@@ -68,7 +68,7 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
             if i % 10 == 0:
                 print_msg(i, likelihood)
 
-        if np.abs(likelihood - lkhood) <= tol:
+        if abs(likelihood - lkhood) <= tol:
             if verbose:
                 print_msg(i, likelihood)
             break
