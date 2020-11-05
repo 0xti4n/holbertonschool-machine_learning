@@ -60,19 +60,23 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
     lkhood = 0
     pi, m, S = initialize(X, k)
 
-    for i in range(1, iterations + 1):
+    for i in range(iterations):
         g, likelihood = expectation(X, pi, m, S)
 
         if verbose:
-            if (i - 1) % 10 == 0 or i - 1 == 0:
-                print_msg(i - 1, likelihood)
+            if i % 10 == 0:
+                print_msg(i, likelihood)
 
-        if tol >= abs(likelihood - lkhood) and i != 0:
+        if tol >= abs(likelihood - lkhood):
             if verbose:
-                print_msg(i - 1, likelihood)
+                print_msg(i, likelihood)
             break
 
         pi, m, S = maximization(X, g)
         lkhood = likelihood
+
+    g, likelihood = expectation(X, pi, m, S)
+    if verbose and i == iterations:
+        print_msg(i, likelihood)
 
     return pi, m, S, g, likelihood
