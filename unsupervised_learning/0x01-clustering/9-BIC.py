@@ -70,7 +70,7 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
 
             if BIC_prev >= BIC:
                 best_k = i
-                best_result = ((pi, m, S))
+                best_result = (pi, m, S)
                 BIC_prev = BIC
 
             lk.append(lkhood)
