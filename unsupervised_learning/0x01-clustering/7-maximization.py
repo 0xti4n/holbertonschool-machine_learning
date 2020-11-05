@@ -28,6 +28,12 @@ def maximization(X, g):
     if not isinstance(g, np.ndarray) or len(g.shape) != 2:
         return None, None, None
 
+    if g.shape[1] != X.shape[0]:
+        return None, None, None
+
+    if not np.isclose(g.sum(0), 1).all():
+        return None, None, None
+
     n, d = X.shape
 
     pi = np.einsum('kn->k', g) / n
