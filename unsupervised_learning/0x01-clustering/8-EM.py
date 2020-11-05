@@ -75,7 +75,6 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
         pi, m, S = maximization(X, g)
         lkhood = likelihood
 
-    g, likelihood = expectation(X, pi, m, S)
     if verbose and i + 1 == iterations:
         print_msg(i + 1, likelihood)
 
