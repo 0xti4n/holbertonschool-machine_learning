@@ -51,7 +51,10 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
     if not isinstance(iterations, int) or iterations <= 0:
         return None, None, None, None, None
 
-    if not isinstance(tol, float) or tol <= 0:
+    if not isinstance(tol, float) or tol < 0:
+        return None, None, None, None, None
+
+    if not isinstance(verbose, bool):
         return None, None, None, None, None
 
     lkhood = 0
