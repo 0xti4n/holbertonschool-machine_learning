@@ -43,16 +43,16 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
         * l is the log likelihood of the model
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
-        return None, None, None, None
+        return None, None, None, None, None
 
     if not isinstance(k, int) or k <= 0:
-        return None, None, None, None
+        return None, None, None, None, None
 
     if not isinstance(iterations, int) or iterations <= 0:
-        return None, None, None, None
+        return None, None, None, None, None
 
     if not isinstance(tol, float) or tol <= 0:
-        return None, None, None, None
+        return None, None, None, None, None
 
     lkhood = 0
     pi, m, S = initialize(X, k)
@@ -66,7 +66,8 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
                 print_msg(i, likelihood)
 
         if np.abs(likelihood - lkhood) <= tol:
-            print_msg(i, likelihood)
+            if verbose:
+                print_msg(i, likelihood)
             break
         lkhood = likelihood
 
