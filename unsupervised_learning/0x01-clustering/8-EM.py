@@ -9,7 +9,7 @@ maximization = __import__('7-maximization').maximization
 def print_msg(i, likelihood):
     """function that print msg"""
     msg1 = 'Log Likelihood after {} '.format(i)
-    msg2 = 'iterations: {:0.5f}'.format(likelihood)
+    msg2 = 'iterations: {}'.format(likelihood)
     print(msg1 + msg2)
 
 
@@ -65,11 +65,11 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
 
         if verbose:
             if i % 10 == 0:
-                print_msg(i, likelihood)
+                print_msg(i, round(likelihood, 5))
 
         if tol >= abs(likelihood - lkhood):
             if verbose:
-                print_msg(i, likelihood)
+                print_msg(i, round(likelihood, 5))
             break
 
         pi, m, S = maximization(X, g)
@@ -77,6 +77,6 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
 
     g, likelihood = expectation(X, pi, m, S)
     if verbose and i + 1 == iterations:
-        print_msg(i + 1, likelihood)
+        print_msg(i + 1, round(likelihood, 5))
 
     return pi, m, S, g, likelihood
