@@ -23,10 +23,10 @@ def maximization(X, g):
             the updated covariance matrices for each cluster
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
-        return None, None
+        return None, None, None
 
     if not isinstance(g, np.ndarray) or len(g.shape) != 2:
-        return None, None
+        return None, None, None
 
     n, d = X.shape
 
