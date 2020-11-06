@@ -23,9 +23,6 @@ def gmm(X, k):
         * bic is a numpy.ndarray of shape (kmax - kmin + 1)
             containing the BIC value for each cluster size tested
     """
-    if not isinstance(k, int) or k <= 0:
-        return None, None
-
     gmm = sm.GaussianMixture(n_components=k).fit(X)
 
     pi = gmm.weights_
