@@ -128,7 +128,7 @@ def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
         Emission, or None, None on failure
     """
     T = Observations.shape[0]
-    M = Transition.shape[0]
+    M, N = Emission.shape
 
     for n in range(1, iterations):
         _, F = forward(Observations, Emission, Transition, Initial)
@@ -154,10 +154,9 @@ def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
         gamma = np.hstack((gamma,
                            np.sum(xi[:, :, T - 2], axis=0).reshape((-1, 1))))
 
-        K = Emission.shape[1]
         den = np.sum(gamma, axis=1)
 
-        for l in range(K):
+        for l in range(N):
             Emission[:, l] = np.sum(gamma[:, Observations == l], axis=1)
 
         Emission = np.divide(Emission, den.reshape((-1, 1)))
