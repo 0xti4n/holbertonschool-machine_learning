@@ -130,10 +130,7 @@ def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
     T = Observations.shape[0]
     M = Transition.shape[0]
 
-    if iterations == 1000:
-        iterations = 380
-
-    for n in range(iterations):
+    for n in range(1, iterations):
         _, F = forward(Observations, Emission, Transition, Initial)
         _, B = backward(Observations, Emission, Transition, Initial)
 
