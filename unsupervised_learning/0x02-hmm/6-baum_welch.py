@@ -43,23 +43,29 @@ def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
 
         xi = np.zeros((M, M, T - 1))
 
-        for i in range(T - 1):
-            den = np.dot(np.dot(F[:, i].T, Transition) *
-                         Emission[:, Observations[i + 1]].T, B[:, i + 1])
+        for t in range(T - 1):
+            aux = np.dot(F[:, t].T, Transition)
+            aux = aux * Emission[:, Observations[t + 1]].T
 
-            for j in range(M):
-                num = F[j, i] * Transition[j] *\
-                    Emission[:, Observations[i + 1]].T * B[:, i + 1].T
-                xi[j, :, i] = num / den
+            den = np.dot(aux, B[:, t + 1])
+            for i in range(M):
+                aux1 = F[i, t] * Transition[i]
+                aux1 = aux1 * Emission[:, Observations[t + 1]].T
+                num = aux1 * B[:, t + 1].T
+                xi[i, :, t] = num / den
 
-        gamma = np.sum(xi, axis=1)
-        Transition = np.sum(xi, 2) / np.sum(gamma, axis=1).reshape((-1, 1))
+        gamma = xi.sum(1)
+        sum_gamma = np.sum(gamma, axis=1).reshape((-1, 1))
+        Transition = np.sum(xi, axis=2) / sum_gamma
+
         gamma = np.hstack((gamma,
                            np.sum(xi[:, :, T - 2], axis=0).reshape((-1, 1))))
-        denom = np.sum(gamma, axis=1)
 
-        for i in range(N):
-            Emission[:, i] = np.sum(gamma[:, Observations == i], axis=1)
-        Emission = np.divide(Emission, denom.reshape((-1, 1)))
+        den = np.sum(gamma, axis=1)
 
-    return (Transition, Emission)
+        for l in range(N):
+            Emission[:, l] = np.sum(gamma[:, Observations == l], axis=1)
+
+        Emission = np.divide(Emission, den.reshape((-1, 1)))
+
+    return Transition, Emission
