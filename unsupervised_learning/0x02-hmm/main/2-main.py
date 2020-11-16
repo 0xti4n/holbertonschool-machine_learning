@@ -21,8 +21,13 @@ if __name__ == '__main__':
                   [0, 0.1, 0.5, 0.2, 0.2],
                   [0, 0.1, 0.2, 0.5, .2],
                   [0, 0.1, 0.2, 0.2, 0.5]])
+    f = np.array([[1, 0, 0, 0],
+                  [0, 1, 0, 0],
+                  [0, 0, 0.5, 0.5],
+                  [0, 0.5, 0.5, 0]])
     print(absorbing(a))
     print(absorbing(b))
     print(absorbing(c))
     print(absorbing(d))
     print(absorbing(e))
+    print(absorbing(f))
