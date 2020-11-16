@@ -17,10 +17,14 @@ def absorbing(P):
         return False
 
     n, _ = P.shape
+    n1 = n // 2
     if (P == np.eye(n)).all():
         return True
 
     if (np.diag(P) == 1).any():
+        p = P[0:n1, 0:n1]
+        if (p == np.eye(n1)).all():
+            return True
         for i in range(n):
             for j in range(n):
                 if i == j and i + 1 < n and j + 1 < n:
