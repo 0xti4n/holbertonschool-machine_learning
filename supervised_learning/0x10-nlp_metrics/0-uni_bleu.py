@@ -28,7 +28,7 @@ def uni_bleu(references, sentence):
             actual_ref[word] = actual_ref.get(word, 1)
         for word in actual_ref:
             max_dict[word] = max(max_dict.get(word, 0), actual_ref[word])
-        diff_ref_and_sentences.append(len(ref) - sent_length)
+        diff_ref_and_sentences.append(np.abs(len(ref) - sent_length))
 
     counter = 0
     for word in dict_sentences:
