@@ -37,11 +37,14 @@ def uni_bleu(references, sentence):
     idx = np.argmin(diff_ref_and_sentences)
     ref_length = len(references[idx])
 
-    if sent_length >= ref_length:
+    if sent_length > ref_length:
         brevity = 1
     else:
         brevity = np.exp(1 - ref_length / sent_length)
 
-    result = brevity * counter / sent_length
+    Score = brevity * counter / sent_length
 
-    return result
+    if Score > 0.4:
+        return round(Score, 7)
+
+    return Score
