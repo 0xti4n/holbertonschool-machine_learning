@@ -24,7 +24,7 @@ def fasttext_model(sentences, size=100, min_count=5, negative=5,
     -> Returns: the trained model
     """
     model = FastText(sentences=sentences, size=size, min_count=min_count,
-                     negative=negative, window=window, cbow_mean=cbow,
+                     negative=negative, window=window, sg=cbow,
                      iter=iterations, seed=seed, workers=workers)
 
     return model

@@ -25,7 +25,7 @@ def word2vec_model(sentences, size=100, min_count=5,
     """
     model = Word2Vec(sentences=sentences, size=size,
                      min_count=min_count, window=window,
-                     negative=negative, cbow_mean=cbow,
+                     negative=negative, sg=cbow,
                      iter=iterations, seed=seed, workers=workers)
 
     return model
