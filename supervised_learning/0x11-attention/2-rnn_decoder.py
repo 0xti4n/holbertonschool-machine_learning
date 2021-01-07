@@ -24,7 +24,7 @@ class RNNDecoder(tf.keras.layers.Layer):
                                                    output_dim=embedding)
 
         self.gru = tf.keras.layers.GRU(units=self.units,
-                                       kernel_initializer="glorot_uniform",
+                                       recurrent_initializer="glorot_uniform",
                                        return_sequences=True,
                                        return_state=True)
 
