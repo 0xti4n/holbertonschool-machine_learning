@@ -33,8 +33,7 @@ class Dataset():
 
     def tokenize_dataset(self, data):
         """tokenize data"""
-        tf.compat.v1.enable_eager_execution()
-        tokenizator = tfds.deprecated.text.SubwordTextEncoder.build_from_corpus
+        tokenizator = tfds.features.text.SubwordTextEncoder.build_from_corpus
         tokenizer_en = tokenizator((en.numpy() for _, en in data.repeat(1)),
                                    target_vocab_size=2**15)
 
