@@ -12,7 +12,8 @@ def create_masks(inputs, target):
 
     look_ahead_mask = 1 - tf.linalg.band_part(tf.ones((size, size)), -1, 0)
 
-    dec_target_padding_mask = tf.cast(tf.math.equal(target, 0), tf.float32)
-    look_ahead_mask = tf.maximum(dec_target_padding_mask, look_ahead_mask)
+    dec_target_padd_mask = tf.cast(tf.math.equal(target, 0), tf.float32)
+    dec_target_padd_mask = dec_target_padd_mask[:, tf.newaxis, tf.newaxis, :]
+    look_ahead_mask = tf.maximum(dec_target_padd_mask, look_ahead_mask)
 
     return encoder_mask, look_ahead_mask, encoder_mask
