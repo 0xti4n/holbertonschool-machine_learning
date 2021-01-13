@@ -56,7 +56,7 @@ class Dataset():
         return pt_tokens, en_tokens
 
     def tf_encode(self, pt, en):
-        """"""
+        """Tf_encode"""
         pt, en = self.encode(pt, en)
         pt = tf.cast(pt, tf.int64)
         en = tf.cast(en, tf.int64)
