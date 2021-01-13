@@ -4,7 +4,7 @@ import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
 
 
-class Dataset2():
+class Dataset():
     """Class Dataset"""
     def __init__(self):
         """class init"""
