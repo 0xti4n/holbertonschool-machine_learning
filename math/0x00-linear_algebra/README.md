@@ -29,6 +29,7 @@ numpy 1.15
 ```
 ## Repo content
 * **Main Folder that contains all main of the following tasks:**
+
 | Task | Description |
 | --- | --- |
 |**0. Slice Me Up** |complete codebase
