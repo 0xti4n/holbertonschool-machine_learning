@@ -2,8 +2,6 @@
 
 ## Specializations - Machine Learning ― Math.
 
-![Holberton School](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/9/843c4172ce8623cf3f29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20210209%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210209T201943Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=92a91aa168e718d2493d199e8650f44bc9b7cf2b5c2d165f8b998d5830fa8365)
-
 ## Description
 
 * This repository contains some basic Calculus exercises
