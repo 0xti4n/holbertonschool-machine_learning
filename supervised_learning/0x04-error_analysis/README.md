@@ -41,7 +41,6 @@ numpy 1.15
 |**4. F1 score** | calculates the F1 score of a confusion matrix
 |**5. Dealing with Error** | text file Answer
 |**6. Compare and Contrast** | text file Answer
-|**** |
 
 ## Usage
 * Clone the repo and execute the main files
