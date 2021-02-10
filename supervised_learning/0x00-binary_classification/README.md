@@ -5,6 +5,7 @@
 ## Description
 
 * This repository contains binary classification exercises
+* Please download these datasets (Binary_Train.npz, Binary_Dev.npz, MNIST.npz) to test all tasks
 
 ## Learning Objectives
 
