@@ -29,6 +29,7 @@ keras
 |**Spuervised learning**| all tasks of supervised learning
 |**Unsupervised learning**| all tasks of unsupervised learning
 |**reinforcement learning**| all tasks of reinforcement learning
+|**math**| all base math tasks
 
 ## Usage
 * Clone the repo and execute the main files
