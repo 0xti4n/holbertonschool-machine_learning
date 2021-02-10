@@ -8,7 +8,7 @@
 
 ## Learning Objectives
 
-**Understant:**
+**Understand:**
 
 * Summation and Product notation
 * What is a series?

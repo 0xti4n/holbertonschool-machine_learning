@@ -6,7 +6,7 @@
 * This repository contains some basic algebra exercises
 
 ## Learning Objectives
-**Understant:**
+**Understand:**
 * What is a vector?
 * What is a matrix?
 * What is a transpose?

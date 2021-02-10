@@ -8,7 +8,7 @@
 
 ## Learning Objectives
 
-**Understant:**
+**Understand:**
 
 * Who is Carl Friedrich Gauss?
 * What is a joint/multivariate distribution?

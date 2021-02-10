@@ -8,7 +8,7 @@
 
 ## Learning Objectives
 
-**Understant:**
+**Understand:**
 
 * What is probability?
 * Basic probability notation

@@ -8,7 +8,7 @@
 
 ## Learning Objectives
 
-**Understant:**
+**Understand:**
 
 * What is Bayesian Probability?
 * What is Bayes’ rule and how do you use it?

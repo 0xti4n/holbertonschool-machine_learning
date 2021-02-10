@@ -8,7 +8,7 @@
 
 ## Learning Objectives
 
-**Understant:**
+**Understand:**
 
 * What is a plot?
 * What is a scatter plot? line graph? bar graph? histogram?
