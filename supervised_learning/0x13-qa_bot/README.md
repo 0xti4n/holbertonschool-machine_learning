@@ -42,9 +42,6 @@ pip install --user transformers
 |**2. Answer Questions**| answers questions from a reference text
 |**3. Semantic Search**| performs semantic search on a corpus of documents
 |**4. Multi-reference Question Answering**|  answers questions from multiple reference texts
-|****|
-|****|
-
 
 ## Usage
 * Clone the repo and execute the main files
