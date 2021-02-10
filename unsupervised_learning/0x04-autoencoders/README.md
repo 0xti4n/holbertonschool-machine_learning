@@ -32,7 +32,7 @@ tensorflow (version 1.12)
 | Task | Description |
 | --- | --- |
 |**0. "Vanilla" Autoencoder**| creates an autoencoder
-|** 1. Sparse Autoencoder**| creates a sparse autoencoder
+|**1. Sparse Autoencoder**| creates a sparse autoencoder
 |**2. Convolutional Autoencoder**| creates a convolutional autoencoder
 |**3. Variational Autoencoder**| creates a variational autoencoder
 
