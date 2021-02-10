@@ -44,10 +44,6 @@ tensorflow 1.15
 |**8. Transformer Encoder**| class Encoder that inherits from tensorflow.keras.layers.Layer to create the encoder for a transformer
 |**9. Transformer Decoder**| class Decoder that inherits from tensorflow.keras.layers.Layer to create the decoder for a transformer
 |**10. Transformer Network**| class Transformer that inherits from tensorflow.keras.Model to create a transformer network
-|****|
-|****|
-|****|
-|****|
 
 ## Usage
 * Clone the repo and execute the main files
