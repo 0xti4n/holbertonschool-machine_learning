@@ -29,7 +29,7 @@ test your main files with the following data:
 ## Dependencies
 ```
 Python 3.5
-numpy 1.5
+numpy 1.15
 ```
 
 ## Repo content
