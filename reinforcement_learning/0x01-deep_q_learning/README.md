@@ -37,7 +37,7 @@ pip install --user h5py
 
 | Task | Description |
 | --- | --- |
-|**0.Breakout**| python script train.py that utilizes keras, keras-rl, and gym to train an agent that can play Atari’s Breakout, and  python script play.py that can display a game played by the agent trained by train.py
+|**0.Breakout**| python script **train.py** that utilizes **keras**, **keras-rl**, and **gym** to train an agent that can play Atari’s Breakout, and  python script **play.py** that can display a game played by the agent trained by **train.py**
 
 ## Usage
 * Clone the repo and execute the main files
