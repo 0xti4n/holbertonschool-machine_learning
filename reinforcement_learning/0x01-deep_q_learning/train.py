@@ -109,7 +109,7 @@ if __name__ == '__main__':
 
     callbacks += [FileLogger(log_filename, interval=100)]
     dqn.fit(env, callbacks=callbacks,
-            nb_steps=100000,
+            nb_steps=1000000,
             visualize=True)
 
     dqn.save_weights(filename, overwrite=True)
