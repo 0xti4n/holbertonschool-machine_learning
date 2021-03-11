@@ -27,23 +27,16 @@ def availableShips(passengerCount):
     """
     starships = []
     url = 'https://swapi-api.hbtn.io/api/starships/'
-    try:
+
+    while(url is not None):
         res_j = do_request(url)
 
-        while(True):
-            for obj in res_j['results']:
-                try:
-                    token = obj['passengers'].split(',')
-                    if int(token[0]) > passengerCount:
-                        starships.append(obj['name'])
-                except ValueError:
-                    continue
+        for obj in res_j['results']:
+            token = obj['passengers'].split(',')
+            token = token[0]
+            if token.isnumeric() and int(token) > passengerCount:
+                starships.append(obj['name'])
 
-            if res_j['next'] is None:
-                return starships
+        url = res_j['next']
 
-            if res_j['next'] is not None:
-                res_j = do_request(res_j['next'])
-
-    except Exception:
-        return starships
+    return starships
