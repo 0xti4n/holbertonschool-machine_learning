@@ -24,21 +24,15 @@ def sentientPlanets():
     """
     names = []
     url = 'https://swapi-api.hbtn.io/api/species/'
-    try:
+
+    while(url is not None):
         res_j = do_request(url)
+        for obj in res_j['results']:
+            if obj['designation'] == 'sentient':
+                if obj['homeworld'] is not None:
+                    new_r = do_request(obj['homeworld'])
+                    names.append(new_r['name'])
 
-        while(True):
-            for obj in res_j['results']:
-                if obj['designation'] == 'sentient':
-                    if obj['homeworld'] is not None:
-                        new_r = do_request(obj['homeworld'])
-                        names.append(new_r['name'])
+        url = res_j['next']
 
-            if res_j['next'] is None:
-                return names
-
-            if res_j['next'] is not None:
-                res_j = do_request(res_j['next'])
-
-    except Exception:
-        return names
+    return names
