@@ -27,8 +27,12 @@ def sentientPlanets():
 
     while(url is not None):
         res_j = do_request(url)
+
         for obj in res_j['results']:
-            if obj['designation'] == 'sentient':
+            obj_d = obj['designation']
+            obj_c = obj['classification']
+
+            if obj_d == 'sentient' or obj_c == 'sentient':
                 if obj['homeworld'] is not None:
                     new_r = do_request(obj['homeworld'])
                     names.append(new_r['name'])
