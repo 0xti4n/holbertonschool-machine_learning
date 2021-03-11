@@ -32,8 +32,7 @@ def availableShips(passengerCount):
         res_j = do_request(url)
 
         for obj in res_j['results']:
-            token = obj['passengers'].split(',')
-            token = token[0]
+            token = obj['passengers'].replace(',', '')
             if token.isnumeric() and int(token) >= passengerCount:
                 starships.append(obj['name'])
 
