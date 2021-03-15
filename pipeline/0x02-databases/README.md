@@ -1,6 +1,6 @@
 # Databases
 
-## Specializations - Machine Learning ― The Pipeline 
+## Specializations - Machine Learning ― The Pipeline
 
 ## Description
 
@@ -53,9 +53,9 @@ PyMongo (version 3.10)
 |**11. Rotten tomatoes**| script that lists all shows from hbtn_0d_tvshows_rate by their rating.
 |**12. Best genre**| script that lists all genres in the database hbtn_0d_tvshows_rate by their rating.
 |**13. We are all unique!**| Write a SQL script that creates a table users.
-|** 14. In and not out**| SQL script that creates a table users.
+|**14. In and not out**| SQL script that creates a table users.
 |**15. Best band ever!**| SQL script that ranks country origins of bands, ordered by the number of (non-unique) fans.
-|** 16. Old school band**| SQL script that lists all bands with Glam rock as their main style, ranked by their longevity.
+|**16. Old school band**| SQL script that lists all bands with Glam rock as their main style, ranked by their longevity.
 |**17. Buy buy buy**| SQL script that creates a trigger that decreases the quantity of an item after adding a new order.
 |**18. Email validation to sent**| SQL script that creates a trigger that resets the attribute valid_email only when the email has been changed.
 |**19. Add bonus**| SQL script that creates a stored procedure AddBonus that adds a new correction for a student.
