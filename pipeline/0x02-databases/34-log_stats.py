@@ -7,25 +7,20 @@ if __name__ == "__main__":
     client = MongoClient('mongodb://127.0.0.1:27017')
     nginx_collection = client.logs.nginx
 
-    count_logs = nginx_collection.count()
-    status = nginx_collection.count({'path': '/status'})
-    method = {
-        "GET": 0,
-        "POST": 0,
-        "PUT": 0,
-        "PATCH": 0,
-        "DELETE": 0
-    }
-
-    for m in method.keys():
-        q = nginx_collection.count({'method': m})
-        method[m] = q
-
+    count_logs = nginx_collection.count_documents({})
+    path = {'method': 'GET', 'path': '/status'}
+    status = nginx_collection.count_documents(path)
+    method = [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+    ]
     print('{} logs'.format(count_logs))
     print('Methods:')
-    print('\t method GET: {}'.format(method['GET']))
-    print('\t method POST: {}'.format(method['POST']))
-    print('\t method PUT: {}'.format(method['PUT']))
-    print('\t method PATCH: {}'.format(method['PATCH']))
-    print('\t method DELETE: {}'.format(method['DELETE']))
+    for m in method:
+        n_data = nginx_collection.count_documents({'method': m})
+        print('\tmethod {}: {}'.format(m, n_data))
+
     print('{} status check'.format(status))
