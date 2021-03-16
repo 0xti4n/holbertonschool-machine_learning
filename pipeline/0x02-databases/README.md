@@ -35,7 +35,7 @@ PyMongo (version 3.10)
 ```
 
 ## Repo content
-* A folder named **main_sql** and **main** that contain main for some files of the following tasks:
+* A folder named **main_sql**, **main** and **init_sql** that contain main for some files of the following tasks:
 
 | Task | Description |
 | --- | --- |
